@@ -1,3 +1,5 @@
+package Task2;
+
 class Heroes {
     String name; // имя героя
     int fraction; // 1 - Замок 2 - Оплот, 3 - Башня, 4 - Инферно
@@ -24,6 +26,7 @@ class Heroes {
     // Получает опыт
     void getExperience(double new_experience) {
         this.experience += new_experience;
+        levelUp(); // сразу добавляем опыт в уровень персонажа
     }
 
     // Повышает уровень
@@ -86,7 +89,7 @@ class Units {
 
     // Получает урон в бою
     void getDamage(int new_damage) {
-        this.health -= (new_damage - this.protection);
+        this.health -= new_damage;
     }
 
     // хилится героем или палаткой
@@ -104,7 +107,6 @@ public class Task2 {
 
         Gelo.magicWell(); // восстанавливает очки у волшебного колодца
         Gelo.getExperience(1500); // получает очки опыта
-        Gelo.levelUp(); // уровень растет при получении опыта
         Gelo.win(); // побеждает в битве
 
         System.out.println("Характеристики героя: " + Gelo.name);
@@ -130,8 +132,8 @@ public class Task2 {
         Units Unicorn = new Units("Единорог", 850, 15, 14, 22, 90);
 
         Unicorn.getDamage(30); // получает урон в бою
-        Unicorn.getDamage(20);
-        Unicorn.heal();
+        Unicorn.getDamage(20); // еще урон
+        Unicorn.heal(); // лечится
 
         System.out.println("Характеристики юнита: " + Unicorn.name);
         System.out.println("Стоимость: " + Unicorn.price);
