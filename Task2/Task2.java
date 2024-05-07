@@ -120,7 +120,7 @@ public class Task2 {
         Cities Forest = new Cities("Форест", 2, 2, 15000);
 
         Forest.levelUp(); // улучшаем город
-        Forest.levelUp(); // еще раз до максимума
+        Forest.levelUp(); // еще раз, до максимума
         Forest.cityLost(); // враг захватил и разрушил город во время осады
 
         System.out.println("Характеристики города: " + Forest.name);
