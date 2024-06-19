@@ -8,7 +8,6 @@ public class IndexSearch {
         for (int i = 0; i < array.length; i ++) {
             if (array[i] == a) {
                 logger.info("Поиск успешно завершен");
-                assert i >= 0 && i < array.length;
                 return i;
             }
         }
