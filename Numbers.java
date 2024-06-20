@@ -2,21 +2,20 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
+import java.util.ArrayList;
 
 public class Numbers {
-    public static int[] getSumSixNumbers (int a, int b, String way) {
+    public static int[] getSumSixNumbers (List files) {
+        Random rand = new Random();
         int[] sum = new int[2];
         sum[0] = 0;
         sum[1] = 0;
         for (int i = 0; i < 2; i++) {
-            int[] s;
-            if (i == 0) {
-                s = sumSixNumbers(a, way);
-            } else {
-                s = sumSixNumbers(b, way);
-            }
+            File file = (File) files.get(rand.nextInt(files.size()));
+            int[] s = sumSixNumbers(file);
             if (s[1] != 0) {
                 sum[1] = s[1];
                 return sum;
@@ -26,14 +25,14 @@ public class Numbers {
         return sum;
     }
 
-public static int[] sumSixNumbers (int f, String way) {
+public static int[] sumSixNumbers (File file) {
     Logger log = Logger.getLogger(Numbers.class.getName());
         int[] res = new int[2];
         res[1] = 0;
         int sum = 0;
         BufferedReader br = null;
             try {
-                File my_fil = new File(way + f + ".txt");
+                File my_fil = new File(String.valueOf(file));
                 br = new BufferedReader(new FileReader(my_fil));
                 String st = br.readLine();
                 int count = 0;
@@ -54,6 +53,7 @@ public static int[] sumSixNumbers (int f, String way) {
                 log.warning ("Некорректное значение в строке");
             } finally {
                 try {
+                    assert br != null : "Ошибка при открытии файла/Файл не найден";
                     br.close();
                 } catch (IOException e) {
                     res[1] = 3;
@@ -65,13 +65,19 @@ public static int[] sumSixNumbers (int f, String way) {
         }
 
     public static void main(String[] args) {
-
-    Random rand = new Random();
-    int a = rand.nextInt(10) + 1;
-    int b = rand.nextInt(10) + 1;
-    String way = "E:\\Обучение\\exercises\\";
-
-    int r[] = getSumSixNumbers(a, b, way);
+        String way = "E:\\Обучение\\exercises";
+        List<File> files = new ArrayList<>();
+        File directory = new File(way);
+        if (directory.isDirectory()) {
+            File[] listFiles = directory.listFiles();
+            assert listFiles != null : "Пустая директория!";
+            for (File file : listFiles) {
+                if (file.isFile() && file.getName().endsWith(".txt")) {
+                    files.add(file);
+                }
+            }
+        }
+        int r[] = getSumSixNumbers(files);
         System.out.println(r[0]);
         System.out.println(r[1]);
     }
