@@ -32,13 +32,10 @@ public class DelFolder {
             ArrayList<ArrayList<File>> fil = arrayList(path);
             if (fil.get(1).size() > 0) return false;
 
+            for(int i=0; i<fil.get(0).size(); i++)
+                if(! fil.get(0).get(i).delete()) return false;
+
             File directory = new File(path.getAbsolutePath());
-            File[] files = directory.listFiles();
-            if (files != null) {
-                for (File file : files) {
-                    file.delete();
-                }
-            }
             if (!directory.delete()) return false;
             return true;
 
