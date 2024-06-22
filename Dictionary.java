@@ -9,22 +9,23 @@ public class Dictionary {
         ArrayList<Integer> resultList = new ArrayList<>();
         // Цикл по элементам списка list
         for (Integer i : list) {
-            // Если элемент существует в списке - добавляю 1 к текущему значению
-            if (equalsNum.containsKey(i)) {
-                equalsNum.put(i, equalsNum.get(i) + 1);
+            // Добавляю значение ключа i в переменную
+            Integer count = equalsNum.get(i);
+            // Если значение существует, увеличиваю на 1
+            if (count != null) {
+                equalsNum.put(i, count + 1);
             // Иначе добавляю ключ со значением 1
             } else {
                 equalsNum.put(i, 1);
             // Если значение ключа >= N и список не содержит это значение, добавляю его в список
-            } if (equalsNum.get(i) >= N) {
-                if (!resultList.contains(i)) {
-                    resultList.add(i);
-                }
+            }
+            if (equalsNum.get(i) >= N && !resultList.contains(i)) {
+                resultList.add(i);
             }
         }
-
         return resultList;
     }
+
     public static void main(String[] args) {
         // Создаю словарь
         HashMap<Integer, String> NumbersList = new HashMap<>();
