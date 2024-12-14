@@ -40,6 +40,13 @@ class Heroes {
         this.morale = 100;
         this.levelUp();
     }
+
+    // Метод-фабрика для создания героя Гело
+    static Heroes createGelo() {
+        Heroes hero = new Heroes("Гело", 2, 1.0, 900.0, 30, 80);
+        hero.magicWell(); // Восстановление очков заклинаний после создания
+        return hero;
+    }
 }
 
 class Cities {
@@ -67,6 +74,13 @@ class Cities {
     // Город захвачен после осады
     void cityLost() {
         this.level -= 1;
+    }
+
+    // метод-фабрика для создания города Форест
+    static Cities createForest() {
+        Cities city = new Cities("Форест", 2, 2, 15000);
+        city.levelUp(); // Улучшаем город после создания
+        return city;
     }
 }
 
@@ -98,12 +112,22 @@ class Units {
             this.health += 10;
         }
     }
+
+    // метод-фабрика для создания юнита Единорог
+    static Units createUnicorn() {
+        Units unit = new Units("Единорог", 850, 15, 14, 22, 90);
+        unit.heal(); // Лечение юнита после создания
+        return unit;
+    }
 }
 
 public class Task2 {
     public static void main(String[] args) {
 
-        Heroes Gelo = new Heroes("Гело", 2, 1.0, 900.0, 30, 80);
+        // Использование методов-фабрик для создания объектов
+        Heroes Gelo = Heroes.createGelo();
+        Cities Forest = Cities.createForest();
+        Units Unicorn = Units.createUnicorn();
 
         Gelo.magicWell(); // восстанавливает очки у волшебного колодца
         Gelo.getExperience(1500); // получает очки опыта
@@ -117,8 +141,6 @@ public class Task2 {
         System.out.println("Боевой дух отряда: " + Gelo.morale);
         System.out.println();
 
-        Cities Forest = new Cities("Форест", 2, 2, 15000);
-
         Forest.levelUp(); // улучшаем город
         Forest.levelUp(); // еще раз, до максимума
         Forest.cityLost(); // враг захватил и разрушил город во время осады
@@ -128,8 +150,6 @@ public class Task2 {
         System.out.println("Уровень: " + Forest.level);
         System.out.println("Казна: " + Forest.money);
         System.out.println();
-
-        Units Unicorn = new Units("Единорог", 850, 15, 14, 22, 90);
 
         Unicorn.getDamage(30); // получает урон в бою
         Unicorn.getDamage(20); // еще урон
