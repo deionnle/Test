@@ -17,9 +17,9 @@ public class Dictionary {
             // Иначе добавляю ключ со значением 1
             } else {
                 equalsNum.put(i, 1);
-            // Если значение ключа >= N и список не содержит это значение, добавляю его в список
+            // Если значение ключа встречается N раз, добавляю его в список
             }
-            if (equalsNum.get(i) >= N && !resultList.contains(i)) {
+            if (equalsNum.get(i) == N) {
                 resultList.add(i);
             }
         }
